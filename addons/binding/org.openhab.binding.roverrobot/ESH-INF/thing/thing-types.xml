@@ -4,10 +4,9 @@
         xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
         xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
 
-    <!-- Sample Thing Type -->
-    <thing-type id="sample">
+    <thing-type id="rover">
         <label>RoverRobot Binding Thing</label>
-        <description>Sample thing for RoverRobot Binding</description>
+        <description>The Thing for the RoverRobot Binding</description>
 
         <channels>
             <channel id="channel1" typeId="sample-channel"/>
