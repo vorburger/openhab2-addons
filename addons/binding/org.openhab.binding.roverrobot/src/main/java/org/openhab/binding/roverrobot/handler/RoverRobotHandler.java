@@ -12,10 +12,15 @@ import static org.openhab.binding.roverrobot.RoverRobotBindingConstants.CHANNEL_
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.thing.ThingStatus;
+import org.eclipse.smarthome.core.thing.ThingStatusDetail;
 import org.eclipse.smarthome.core.thing.binding.BaseThingHandler;
 import org.eclipse.smarthome.core.types.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import ch.vorburger.raspberry.mc33926.TwoMotorsProvider;
+import ch.vorburger.raspberry.motors.TwoMotors;
+import ch.vorburger.raspberry.turtle.AsyncTurtle;
 
 /**
  * Handling Rover Robot commands.
@@ -26,6 +31,8 @@ public class RoverRobotHandler extends BaseThingHandler {
 
     private Logger logger = LoggerFactory.getLogger(RoverRobotHandler.class);
 
+    private AsyncTurtle turtle;
+
     public RoverRobotHandler(Thing thing) {
         super(thing);
     }
@@ -34,33 +41,51 @@ public class RoverRobotHandler extends BaseThingHandler {
     public void handleCommand(ChannelUID channelUID, Command command) {
         if (channelUID.getId().equals(CHANNEL_1)) {
             String commandString = command.toString(); // (StringType)
-            logger.info(commandString);
-
-            // Note: if communication with thing fails for some reason,
-            // indicate that by setting the status with detail information
-            // updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.COMMUNICATION_ERROR,
-            // "Could not control device at IP address x.x.x.x");
+            switch (commandString) {
+                case "FORWARD2":
+                    turtle.forward(0.2);
+                    break;
+                case "BACK2":
+                    turtle.backward(0.2);
+                    break;
+                case "LEFT45":
+                    turtle.turnLeft(45);
+                    break;
+                case "RIGHT45":
+                    turtle.turnRight(45);
+                    break;
+                default:
+                    logger.warn("handleCommand() unknown command: " + commandString);
+                    break;
+            }
         }
     }
 
     @Override
     public void initialize() {
-        logger.info("initialize()");
+        logger.info("initialize() is about to set-up Raspberry Pi Rover GPIO....");
+        updateStatus(ThingStatus.INITIALIZING);
 
-        // TODO: Initialize the thing. If done set status to ONLINE to indicate proper working.
-        // Long running initialization should be done asynchronously in background.
-        updateStatus(ThingStatus.ONLINE);
+        try {
+            TwoMotors twoMotors = new TwoMotorsProvider().get();
+            turtle = new AsyncTurtle(twoMotors);
 
-        // Note: When initialization can NOT be done set the status with more details for further
-        // analysis. See also class ThingStatusDetail for all available status details.
-        // Add a description to give user information to understand why thing does not work
-        // as expected. E.g.
-        // updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.CONFIGURATION_ERROR,
-        // "Can not access device as username and/or password are invalid");
+            // Just a hard-coded quick first init test, to signal to the user we're up and ready
+            turtle.turnLeft(10);
+            turtle.turnRight(10);
+
+            logger.info("initialize() successfully set-up robot turtle control! Ready now.");
+            updateStatus(ThingStatus.ONLINE);
+
+        } catch (Exception e) {
+            updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.HANDLER_INITIALIZING_ERROR, e.getMessage());
+            logger.error("initialize() failed to set-up robot turtle control :(", e);
+        }
     }
 
     @Override
     public void dispose() {
-        // TODO release GPIO ..
+        // TODO clean release of GPIO .. (This needs a bit of work in ch.vorburger.raspberry.mc33926)
+        turtle = null;
     }
 }
