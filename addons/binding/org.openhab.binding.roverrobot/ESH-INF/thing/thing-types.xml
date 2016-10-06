@@ -15,7 +15,7 @@
 
     <!-- Sample Channel Type -->
     <channel-type id="sample-channel">
-        <item-type>roverrobotItem</item-type>
+        <item-type>String</item-type>
         <label>RoverRobot Binding Channel</label>
         <description>Sample channel for RoverRobot Binding</description>
     </channel-type>

@@ -33,7 +33,8 @@ public class RoverRobotHandler extends BaseThingHandler {
     @Override
     public void handleCommand(ChannelUID channelUID, Command command) {
         if (channelUID.getId().equals(CHANNEL_1)) {
-            // TODO: handle command .. how to get String from Command - cast to StringType?
+            String commandString = command.toString(); // (StringType)
+            logger.info(commandString);
 
             // Note: if communication with thing fails for some reason,
             // indicate that by setting the status with detail information
