@@ -18,8 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The {@link RoverRobotHandler} is responsible for handling commands, which are
- * sent to one of the channels.
+ * Handling Rover Robot commands.
  *
  * @author Michael Vorburger.ch - Initial contribution
  */
@@ -34,7 +33,7 @@ public class RoverRobotHandler extends BaseThingHandler {
     @Override
     public void handleCommand(ChannelUID channelUID, Command command) {
         if (channelUID.getId().equals(CHANNEL_1)) {
-            // TODO: handle command
+            // TODO: handle command .. how to get String from Command - cast to StringType?
 
             // Note: if communication with thing fails for some reason,
             // indicate that by setting the status with detail information
@@ -57,5 +56,10 @@ public class RoverRobotHandler extends BaseThingHandler {
         // as expected. E.g.
         // updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.CONFIGURATION_ERROR,
         // "Can not access device as username and/or password are invalid");
+    }
+
+    @Override
+    public void dispose() {
+        // TODO release GPIO ..
     }
 }

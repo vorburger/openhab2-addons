@@ -10,17 +10,16 @@ package org.openhab.binding.roverrobot;
 import org.eclipse.smarthome.core.thing.ThingTypeUID;
 
 /**
- * The {@link RoverRobotBinding} class defines common constants, which are 
- * used across the whole binding.
- * 
+ * Common constants which are used across this binding.
+ *
  * @author Michael Vorburger.ch - Initial contribution
  */
 public class RoverRobotBindingConstants {
 
     public static final String BINDING_ID = "roverrobot";
-    
+
     // List of all Thing Type UIDs
-    public final static ThingTypeUID THING_TYPE_SAMPLE = new ThingTypeUID(BINDING_ID, "sample");
+    public final static ThingTypeUID THING_TYPE_SAMPLE = new ThingTypeUID(BINDING_ID, "rover");
 
     // List of all Channel ids
     public final static String CHANNEL_1 = "channel1";
