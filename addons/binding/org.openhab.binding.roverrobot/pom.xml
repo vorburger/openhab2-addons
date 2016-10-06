@@ -1,19 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.openhab.binding</groupId>
-    <artifactId>pom</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
-  </parent>
+	<parent>
+		<groupId>org.openhab.binding</groupId>
+		<artifactId>pom</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
+	</parent>
 
-  <groupId>org.openhab.binding</groupId>
-  <artifactId>org.openhab.binding.roverrobot</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+	<groupId>org.openhab.binding</groupId>
+	<artifactId>org.openhab.binding.roverrobot</artifactId>
+	<version>2.0.0-SNAPSHOT</version>
 
-  <name>RoverRobot Binding</name>
-  <packaging>eclipse-plugin</packaging>
+	<name>RoverRobot Binding</name>
+	<packaging>eclipse-plugin</packaging>
+
+	<dependencies>
+		<!-- Tycho won't consider these, but we use them in maven-dependency-plugin to copy to lib/ This is better than listing 
+			artifactItems within maven-dependency-plugin's configuration, because that won't copy the transitive dependencies along. -->
+		<dependency>
+			<groupId>ch.vorburger.raspberry</groupId>
+			<artifactId>mc33926</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.10</version>
+				<executions>
+					<execution>
+						<id>copy-lib-jars</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<excludeGroupIds>p2.eclipse-plugin</excludeGroupIds>
+							<excludeArtifactIds>slf4j-api</excludeArtifactIds>
+							
+							<prependGroupId>true</prependGroupId>
+							<outputDirectory>${project.basedir}/lib</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

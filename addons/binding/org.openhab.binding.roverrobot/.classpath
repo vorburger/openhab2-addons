@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="lib/ch.vorburger.raspberry.mc33926-1.0.0-SNAPSHOT.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/com.pi4j.pi4j-core-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/com.pi4j.pi4j-device-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/com.pi4j.pi4j-example-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/com.pi4j.pi4j-gpio-extension-1.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src/main/java"/>

@@ -5,7 +5,12 @@ Bundle-SymbolicName: org.openhab.binding.roverrobot;singleton:=true
 Bundle-Vendor: openHAB
 Bundle-Version: 2.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Bundle-ClassPath: .
+Bundle-ClassPath: .,
+ lib/ch.vorburger.raspberry.mc33926-1.0.0-SNAPSHOT.jar,
+ lib/com.pi4j.pi4j-core-1.1.jar,
+ lib/com.pi4j.pi4j-device-1.1.jar,
+ lib/com.pi4j.pi4j-example-1.1.jar,
+ lib/com.pi4j.pi4j-gpio-extension-1.1.jar
 Import-Package: 
  org.openhab.binding.roverrobot,
  org.openhab.binding.roverrobot.handler,
