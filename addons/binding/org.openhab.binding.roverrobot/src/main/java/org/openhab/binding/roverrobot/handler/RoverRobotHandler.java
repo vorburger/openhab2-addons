@@ -57,6 +57,10 @@ public class RoverRobotHandler extends BaseThingHandler {
             case "RIGHT45":
                 turtle.turnRight(45);
                 break;
+            case "REFRESH":
+                // Ignore what appears to be some sort of well known (but, by us, un-used)
+                // system command, which is frequently sent to us by openHAB core?
+                break;
             default:
                 log.warn("handleCommand() unknown command: " + commandString);
                 break;
