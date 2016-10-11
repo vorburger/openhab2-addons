@@ -20,7 +20,8 @@ import org.slf4j.LoggerFactory;
 
 import ch.vorburger.raspberry.mc33926.TwoMotorsProvider;
 import ch.vorburger.raspberry.motors.TwoMotors;
-import ch.vorburger.raspberry.turtle.AsyncTurtle;
+import ch.vorburger.raspberry.turtle.QueueingTurtle;
+import ch.vorburger.raspberry.turtle.Turtle;
 
 /**
  * Handling Rover Robot commands.
@@ -32,7 +33,7 @@ public class RoverRobotHandler extends BaseThingHandler {
     private Logger log = LoggerFactory.getLogger(RoverRobotHandler.class);
 
     private TwoMotors twoMotors;
-    private AsyncTurtle turtle;
+    private Turtle turtle;
 
     public RoverRobotHandler(Thing thing) {
         super(thing);
@@ -74,7 +75,7 @@ public class RoverRobotHandler extends BaseThingHandler {
 
         try {
             twoMotors = new TwoMotorsProvider().get();
-            turtle = new AsyncTurtle(twoMotors);
+            turtle = new QueueingTurtle(twoMotors);
 
             // Just a hard-coded quick first init test, to signal to the user we're up and ready
             turtle.turnLeft(10);
