@@ -12,8 +12,6 @@ Bundle-ClassPath: .,
  lib/com.pi4j.pi4j-example-1.1.jar,
  lib/com.pi4j.pi4j-gpio-extension-1.1.jar
 Import-Package: 
- org.openhab.binding.roverrobot,
- org.openhab.binding.roverrobot.handler,
  org.eclipse.smarthome.config.core,
  org.eclipse.smarthome.core.library.types,
  org.eclipse.smarthome.core.thing,
