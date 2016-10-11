@@ -63,7 +63,7 @@ public class RoverRobotHandler extends BaseThingHandler {
                 // system command, which is frequently sent to us by openHAB core?
                 break;
             default:
-                log.warn("handleCommand() unknown command: " + commandString);
+                // log.warn("handleCommand() unknown command: " + commandString);
                 break;
         }
     }
@@ -92,6 +92,8 @@ public class RoverRobotHandler extends BaseThingHandler {
 
     @Override
     public void dispose() {
+        log.info("dispose() halting Rover now....");
+
         turtle.halt();
         turtle = null;
 
