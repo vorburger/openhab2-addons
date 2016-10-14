@@ -46,17 +46,44 @@ public class RoverRobotHandler extends BaseThingHandler {
         }
         String commandString = command.toString(); // (StringType)
         switch (commandString) {
+            case "HALT":
+                turtle.halt();
+                break;
             case "FORWARD2":
                 turtle.forward(0.2);
                 break;
             case "BACK2":
                 turtle.backward(0.2);
                 break;
+            case "FORWARD4":
+                turtle.forward(0.4);
+                break;
+            case "BACK4":
+                turtle.backward(0.4);
+                break;
+            case "LEFT11":
+                turtle.turnLeft(11.5);
+                break;
+            case "RIGHT11":
+                turtle.turnRight(11.5);
+                break;
+            case "LEFT22":
+                turtle.turnLeft(22.5);
+                break;
+            case "RIGHT22":
+                turtle.turnRight(22.5);
+                break;
             case "LEFT45":
                 turtle.turnLeft(45);
                 break;
             case "RIGHT45":
                 turtle.turnRight(45);
+                break;
+            case "LEFT90":
+                turtle.turnLeft(90);
+                break;
+            case "RIGHT90":
+                turtle.turnRight(90);
                 break;
             case "REFRESH":
                 // Ignore what appears to be some sort of well known (but, by us, un-used)
